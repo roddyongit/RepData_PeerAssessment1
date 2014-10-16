@@ -360,6 +360,12 @@ str(new.activity.dataset)
 steps.avg.interval = aggregate(steps ~ interval+day.type, data = new.activity.dataset, FUN = mean)
 
 # Make the panel plot
+<<<<<<< HEAD
+=======
+
+steps.avg.interval = aggregate(steps ~ interval+day.type, data = new.activity.dataset, FUN = mean)
+
+>>>>>>> 19270ffde98d5ebf0739266cfba1db5d7c829bd5
 xyplot(steps ~ interval | day.type,
        data = steps.avg.interval,
        type = "l",
@@ -368,6 +374,10 @@ xyplot(steps ~ interval | day.type,
        ylab = "Number of steps",
        layout = c(1,2,1)
        )
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19270ffde98d5ebf0739266cfba1db5d7c829bd5
 
 ````
 
