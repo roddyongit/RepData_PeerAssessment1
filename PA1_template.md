@@ -455,11 +455,16 @@ str(new.activity.dataset)
 
 # Make the panel plot
 
+steps.avg.interval = aggregate(steps ~ interval+day.type, data = new.activity.dataset, FUN = mean)
+
 xyplot(steps ~ interval | day.type,
-       data = new.activity.dataset,
+       data = steps.avg.interval,
        type = "l",
+       main = "Average steps taken per 5-min interval - (weekday and weekend)",
        xlab = "5-minute interval",
-       ylab = "Number of steps taken")
+       ylab = "Number of steps",
+       layout = c(1,2,1)
+       )
 ```
 
 ![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-27.png) 
