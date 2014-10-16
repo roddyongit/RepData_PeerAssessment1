@@ -5,7 +5,7 @@ output:
     keep_md: true
 ---
 
-### Loading the data 
+### Loading (reading) the data 
 
 
 ```r
@@ -163,7 +163,7 @@ median.total.steps.day
 steps.interval.alldays.no.na = aggregate(steps ~ interval, data = activity.no.na, FUN = mean)
 
 # Plot the steps pattern of 5-minutes interval across all days...
-plot(steps.interval.alldays.no.na$interval, steps.interval.alldays.no.na$steps, type="l", xlab="5-minute interval", ylab="Average number of steps", main="Number of steps taken per 5-min interval - across all days", col="red")
+plot(steps.interval.alldays.no.na$interval, steps.interval.alldays.no.na$steps, type="l", xlab="5-minute interval", ylab="Average number of steps", main="Number of steps taken per 5-min interval - across all days (Version 1)", col="red")
 ```
 
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
@@ -181,11 +181,10 @@ plot(steps.interval.alldays.no.na$interval, steps.interval.alldays.no.na$steps, 
 steps.interval.alldays.no.na1 = aggregate(steps ~ interval1, data = activity.no.na, FUN = mean)
 
 # Plot the steps pattern of 5-minutes interval across all days...
-plot(steps.interval.alldays.no.na1$interval1, steps.interval.alldays.no.na$steps, type="l", xlab="5-minute interval", ylab="Average number of steps", main="Number of steps taken per 5-min interval - across all days", col="red")
+plot(steps.interval.alldays.no.na1$interval1, steps.interval.alldays.no.na$steps, type="l", xlab="5-minute interval", ylab="Average number of steps", main="Number of steps taken per 5-min interval - across all days (Version 2)", col="red")
 ```
 
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11.png) 
-
 
 
 ---
@@ -338,7 +337,7 @@ str(activity)
 new.total.steps.day = aggregate(steps ~ date, data = new.activity.dataset, FUN = sum)
 
 # Create histogram... 
-hist(new.total.steps.day$steps,main="Total number of steps taken each day - with all NAs filled", xlab="Total steps per day", col="red")
+hist(new.total.steps.day$steps,main="Total number of steps taken each day - After imputing missing values", xlab="Total steps per day", col="red")
 ```
 
 ![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
@@ -450,16 +449,17 @@ str(new.activity.dataset)
  library("lattice")
  
 # Calculate average steps of 5-minutes interval across all days for new dataset...
-# ***** May not need this calculation...
- # steps.avg.interval = aggregate(steps ~ interval1+day.type, data = new.activity.dataset, FUN = mean)
+steps.avg.interval = aggregate(steps ~ interval+day.type, data = new.activity.dataset, FUN = mean)
 
 # Make the panel plot
-
 xyplot(steps ~ interval | day.type,
-       data = new.activity.dataset,
+       data = steps.avg.interval,
        type = "l",
+       main = "Average steps taken per 5-min interval - (weekday and weekend)",
        xlab = "5-minute interval",
-       ylab = "Number of steps taken")
+       ylab = "Number of steps",
+       layout = c(1,2,1)
+       )
 ```
 
 ![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-27.png) 
